@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuno Cerqueira — Computer Engineering</title>
+<meta name="description" content="Portfolio of Nuno Cerqueira, Computer Engineering student at ISEP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12181B;
+    --panel:#171F23;
+    --panel-line:#26333A;
+    --ink:#E7EDEE;
+    --ink-dim:#8FA3AA;
+    --signal:#E8A23A;
+    --signal-dim:#7A5A25;
+    --danger:#C4573F;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    line-height:1.5;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit;}
+  ::selection{background:var(--signal); color:#12181B;}
+
+  .rail{
+    position:fixed; top:0; left:0; right:0; height:3px;
+    background:repeating-linear-gradient(90deg, var(--signal-dim) 0 24px, transparent 24px 40px);
+    z-index:5;
+  }
+
+  .wrap{max-width:880px; margin:0 auto; padding:0 28px;}
+
+  header.hero{
+    padding:120px 0 80px;
+    border-bottom:1px solid var(--panel-line);
+  }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--signal);
+    font-size:13px;
+    letter-spacing:0.02em;
+    margin:0 0 18px;
+  }
+  .tag::before{content:"● "; }
+  h1{
+    font-size:clamp(38px, 6vw, 62px);
+    line-height:1.05;
+    margin:0 0 20px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .lede{
+    font-size:18px;
+    color:var(--ink-dim);
+    max-width:60ch;
+    margin:0 0 34px;
+  }
+  .lede b{color:var(--ink); font-weight:500;}
+
+  .linkrow{display:flex; flex-wrap:wrap; gap:12px;}
+  .linkrow a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    padding:9px 16px;
+    border:1px solid var(--panel-line);
+    border-radius:var(--radius);
+    text-decoration:none;
+    color:var(--ink);
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .linkrow a:hover{border-color:var(--signal); color:var(--signal);}
+
+  section{padding:64px 0; border-bottom:1px solid var(--panel-line);}
+  section:last-of-type{border-bottom:none;}
+
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:38px;
+  }
+  .section-head h2{
+    font-size:22px; margin:0; font-weight:600;
+  }
+  .section-head span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--ink-dim);
+  }
+
+  .project{
+    position:relative;
+    padding:0 0 40px 56px;
+    border-left:1px solid var(--panel-line);
+    margin-left:16px;
+  }
+  .project:last-child{padding-bottom:4px;}
+  .project::before{
+    content:attr(data-index);
+    position:absolute;
+    left:-16px;
+    top:0;
+    width:32px; height:32px;
+    background:var(--panel);
+    border:1px solid var(--signal-dim);
+    color:var(--signal);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    transform:translateX(-50%);
+  }
+  .project h3{
+    font-size:19px; margin:2px 0 4px; font-weight:600;
+  }
+  .project .meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-dim);
+    margin-bottom:14px;
+  }
+  .project .meta a{color:var(--signal); text-decoration:none;}
+  .project .meta a:hover{text-decoration:underline;}
+  .project p{margin:0 0 14px; color:var(--ink-dim); max-width:64ch;}
+  .stack{display:flex; flex-wrap:wrap; gap:8px;}
+  .stack span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-dim);
+    border:1px solid var(--panel-line);
+    padding:4px 9px;
+    border-radius:var(--radius);
+  }
+
+  .skillgrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:28px;
+  }
+  .skillgroup .h{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--signal);
+    margin-bottom:10px;
+  }
+  .skillgroup ul{list-style:none; margin:0; padding:0;}
+  .skillgroup li{
+    padding:6px 0;
+    border-bottom:1px dashed var(--panel-line);
+    font-size:14.5px;
+    color:var(--ink-dim);
+  }
+  .skillgroup li:last-child{border-bottom:none;}
+
+  .otherlist{display:grid; gap:16px;}
+  .otheritem{
+    padding:16px 18px;
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:var(--radius);
+    font-size:14.5px;
+    color:var(--ink-dim);
+  }
+  .otheritem b{color:var(--ink); font-weight:500;}
+
+  footer{
+    padding:56px 0 90px;
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px;
+    align-items:flex-end;
+  }
+  footer .big{
+    font-size:clamp(26px,4vw,36px);
+    font-weight:600;
+    max-width:14ch;
+  }
+  footer .meta{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink-dim);}
+  footer a.mail{color:var(--signal); text-decoration:none;}
+  footer a.mail:hover{text-decoration:underline;}
+
+  @media (max-width:600px){
+    header.hero{padding:90px 0 56px;}
+    .project{margin-left:6px; padding-left:44px;}
+    footer{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<div class="rail"></div>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="tag">available for internships &amp; graduate roles</p>
+    <h1>Nuno Cerqueira</h1>
+    <p class="lede">Final-year <b>Computer Engineering</b> student at ISEP, building systems from
+      the hardware layer up — RISC-V routines, embedded sensors, PL/SQL data models, and the
+      Java code that ties them together. Drawn to software where correctness is non-negotiable.</p>
+    <div class="linkrow">
+      <a href="mailto:filipeteixeira1235@gmail.com">EMAIL</a>
+      <a href="https://github.com/1240821" target="_blank" rel="noopener">GITHUB</a>
+      <a href="https://www.linkedin.com/in/nuno-cerqueira-0420a426b/" target="_blank" rel="noopener">LINKEDIN</a>
+      <a href="#projects">PROJECTS ↓</a>
+    </div>
+  </header>
+
+  <section id="projects">
+    <div class="section-head">
+      <h2>Project log</h2>
+      <span class="mono">2025 — 2026</span>
+    </div>
+
+    <div class="project" data-index="01">
+      <h3>Image Processing Toolkit</h3>
+      <div class="meta">ISEP · Group project · Sep 2024 – Jan 2025 · <a href="https://github.com/Departamento-de-Engenharia-Informatica/lapr1-24-25_DCD_03/blob/main/Lapr_projeto/src/Projeto.java" target="_blank" rel="noopener">source →</a></div>
+      <p>My first real programming project — generating and comparing images, and finding similar
+        ones within a set. No object-oriented structure yet, everything lived in a single class,
+        but it's where the fundamentals clicked: procedural logic, arrays, and file I/O in Java.</p>
+      <div class="stack">
+        <span>Java</span><span>Procedural Programming</span><span>Image Processing</span>
+      </div>
+    </div>
+
+    <div class="project" data-index="02">
+      <h3>Railway-Tycoon-Inspired Simulator</h3>
+      <div class="meta">ISEP · Group project · Feb 2025 – Jun 2025 · <a href="https://github.com/Departamento-de-Engenharia-Informatica/sem2-pi-24.25-g031-repo" target="_blank" rel="noopener">source →</a></div>
+      <p>A functional simulation game in the spirit of railway-tycoon management games — and the
+        first project where the codebase moved from procedural scripts into proper object-oriented
+        design, with a JavaFX interface on top.</p>
+      <div class="stack">
+        <span>Java</span><span>JavaFX</span><span>OOP</span>
+      </div>
+    </div>
+
+    <div class="project" data-index="03">
+      <h3>Railway Station &amp; Line Management System</h3>
+      <div class="meta">ISEP · Group project · Sep 2025 – Jan 2026 · <a href="https://github.com/Departamento-de-Engenharia-Informatica/sem3-pi-25-26-g062-repo" target="_blank" rel="noopener">source →</a></div>
+      <p>Managing 64,000+ European railway stations meant leaning hard on graph theory — topological
+        sort, MST, BFS, 2D-trees and AVL trees to keep lookups fast. The data layer was a standalone
+        Oracle PL/SQL module: triggers, stored procedures, and a physics engine for train scheduling.
+        On the hardware side, RISC-V routines and a Raspberry Pi Pico with a DHT11 sensor simulated
+        real railway signaling.</p>
+      <div class="stack">
+        <span>Java</span><span>RISC-V</span><span>Oracle PL/SQL</span><span>Raspberry Pi Pico</span><span>Graph Algorithms</span><span>JUnit</span>
+      </div>
+    </div>
+
+    <div class="project" data-index="04">
+      <h3>Flight Management System</h3>
+      <div class="meta">ISEP · Group project · Feb 2026 – Jun 2026 · <a href="https://github.com/Departamento-de-Engenharia-Informatica/sem4pi2526-sem4pi2526_2df2" target="_blank" rel="noopener">source →</a></div>
+      <p>Scheduling and operational logic for a flight management system — the first project where
+        our database was actually wired into the application instead of standing alone. Used Hibernate
+        to open the connection, then wrote a custom request layer over TCP and UDP rather than leaning
+        on Hibernate's defaults. Supporting network infrastructure (VoIP, DHCP, OSPF, ACLs) configured
+        and tested alongside it.</p>
+      <div class="stack">
+        <span>Java</span><span>Hibernate</span><span>TCP/UDP</span><span>Cisco Packet Tracer</span><span>OSPF</span><span>Scrum</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <h2>Toolset</h2>
+      <span class="mono">languages / systems / practice</span>
+    </div>
+    <div class="skillgrid">
+      <div class="skillgroup">
+        <div class="h">LANGUAGES</div>
+        <ul>
+          <li>Java (Spring Boot, JPA/Hibernate)</li>
+          <li>C / C++</li>
+          <li>Python</li>
+          <li>RISC-V Assembly</li>
+          <li>SQL / Oracle PL-SQL</li>
+        </ul>
+      </div>
+      <div class="skillgroup">
+        <div class="h">SYSTEMS &amp; NETWORKING</div>
+        <ul>
+          <li>Computer architecture</li>
+          <li>TCP/IP, network protocols</li>
+          <li>Cisco Packet Tracer</li>
+          <li>Linux (Ubuntu, CachyOS)</li>
+        </ul>
+      </div>
+      <div class="skillgroup">
+        <div class="h">PRACTICE</div>
+        <ul>
+          <li>Git / GitHub</li>
+          <li>Agile / Scrum</li>
+          <li>Unit testing (JUnit)</li>
+          <li>Object-oriented design</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="other">
+    <div class="section-head">
+      <h2>Also worked on</h2>
+      <span class="mono">outside the classroom</span>
+    </div>
+    <div class="otherlist">
+      <div class="otheritem"><b>Nitrox (Subnautica multiplayer mod)</b> — tracked down and fixed a
+        synchronization bug in an unfamiliar open-source codebase that wasn't mine to begin with.</div>
+      <div class="otheritem"><b>Dual-boot systems</b> — set up and maintained Linux/Windows dual-boot
+        machines, diagnosing driver, hardware, and performance issues along the way.</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="big">Let's talk about<br>what you're building.</div>
+    <div class="meta">
+      <a class="mail" href="mailto:filipeteixeira1235@gmail.com">filipeteixeira1235@gmail.com</a><br>
+      Amarante, Porto District, Portugal<br>
+      <a href="https://github.com/1240821" target="_blank" rel="noopener">github.com/1240821</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
